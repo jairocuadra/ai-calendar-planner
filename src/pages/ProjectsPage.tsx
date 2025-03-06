@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { 
   Box, 
   Typography, 
@@ -22,11 +22,11 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
-  Checkbox,
-  Divider,
-  Paper,
+  ListItemSecondaryAction,
   Switch,
-  FormControlLabel
+  FormControlLabel,
+  Paper,
+  CircularProgress
 } from '@mui/material';
 import { 
   Add as AddIcon, 
@@ -41,6 +41,7 @@ import { usePlanner } from '../contexts/PlannerContext';
 import { Project, Task, Priority } from '../types';
 import { format } from 'date-fns';
 import { resetToMockData } from '../utils/mockData';
+import { PlannerContext } from '../contexts/PlannerContext';
 
 const priorityColors = {
   [Priority.LOW]: '#8bc34a',
@@ -64,10 +65,8 @@ const ProjectsPage: React.FC = () => {
     updateProject, 
     deleteProject, 
     addTask, 
-    updateTask, 
-    deleteTask, 
-    completeTask,
-    toggleTaskAutoSchedule
+    updateTask,
+    scheduleTask
   } = usePlanner();
 
   // Debug logging
@@ -210,21 +209,22 @@ const ProjectsPage: React.FC = () => {
     resetToMockData();
   };
 
-  // Reset task form
-  const resetTaskForm = () => {
-    setTaskForm({
-      title: '',
-      description: '',
-      priority: Priority.MEDIUM,
-      projectId: '',
-      estimatedHours: 1,
-      completed: false,
-      autoSchedule: true,
-      locked: false,
-      dueDate: undefined,
-      scheduledStart: undefined,
-      scheduledEnd: undefined
-    });
+  // Handle task update
+  const handleTaskUpdate = () => {
+    if (taskForm.title && taskForm.projectId) {
+      if (taskForm.id) {
+        const taskToUpdate = tasks.find((t: Task) => t.id === taskForm.id);
+        if (taskToUpdate) {
+          updateTask({
+            ...taskToUpdate,
+            ...taskForm
+          });
+        }
+      } else {
+        addTask(taskForm);
+      }
+      setTaskDialogOpen(false);
+    }
   };
 
   return (

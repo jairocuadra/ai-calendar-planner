@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Paper, Button, Dialog, DialogTitle, DialogContent, List, ListItem, ListItemText, ListItemIcon, Chip, IconButton, DialogActions, Tooltip, FormControlLabel, Switch, TextField, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Box, Typography, Paper, Button, Dialog, DialogTitle, DialogContent, List, ListItem, ListItemText, ListItemIcon, Chip, IconButton, DialogActions, TextField, FormControlLabel, Switch, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -22,7 +22,6 @@ const CalendarPage: React.FC = () => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [taskSelectDialogOpen, setTaskSelectDialogOpen] = useState(false);
   const [taskDetailsDialogOpen, setTaskDetailsDialogOpen] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState<{ start: Date; end: Date; view: any } | null>(null);
   const [editMode, setEditMode] = useState(false);
   const [editedTask, setEditedTask] = useState<Task | null>(null);
@@ -50,7 +49,6 @@ const CalendarPage: React.FC = () => {
       if (task) {
         setSelectedTask(task);
         setEditedTask({...task});
-        setSelectedEvent(clickInfo.event);
         setTaskDetailsDialogOpen(true);
         setEditMode(false);
       }

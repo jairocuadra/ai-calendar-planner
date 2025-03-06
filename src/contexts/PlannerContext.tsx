@@ -39,19 +39,6 @@ export const PlannerProvider: React.FC<PlannerProviderProps> = ({ children }) =>
   const [tasks, setTasks] = useState<Task[]>([]);
   const [events, setEvents] = useState<CalendarEvent[]>([]);
 
-  // Helper function to safely check if localStorage is available
-  const isLocalStorageAvailable = () => {
-    try {
-      const testKey = '__storage_test__';
-      localStorage.setItem(testKey, testKey);
-      localStorage.removeItem(testKey);
-      return true;
-    } catch (e) {
-      console.warn('localStorage is not available:', e);
-      return false;
-    }
-  };
-
   // Load mock data on initial render
   useEffect(() => {
     console.log('Loading mock data:', { 
@@ -396,47 +383,6 @@ export const PlannerProvider: React.FC<PlannerProviderProps> = ({ children }) =>
     
     // No overlaps found, the time slot is available
     return true;
-  };
-
-  // Get the next available time slot for a task
-  const getNextAvailableTimeSlot = (durationMinutes: number, startFrom: Date = new Date()): { start: Date, end: Date } => {
-    // Create a copy of the start date
-    const start = new Date(startFrom);
-    
-    // If it's after 6 PM, move to 9 AM the next day
-    if (start.getHours() >= 18) {
-      start.setDate(start.getDate() + 1);
-      start.setHours(9, 0, 0, 0);
-    }
-    
-    // If it's before 9 AM, move to 9 AM the same day
-    if (start.getHours() < 9) {
-      start.setHours(9, 0, 0, 0);
-    }
-    
-    // Calculate end time based on duration in minutes
-    const end = new Date(start.getTime() + durationMinutes * 60 * 1000);
-    
-    // If the end time is after 6 PM, move to the next day
-    if (end.getHours() >= 18 || (end.getHours() === 17 && end.getMinutes() > 0)) {
-      // Move to the next day at 9 AM
-      start.setDate(start.getDate() + 1);
-      start.setHours(9, 0, 0, 0);
-      end.setTime(start.getTime() + durationMinutes * 60 * 1000);
-    }
-    
-    // Check if the time slot overlaps with existing events
-    let isAvailable = isTimeSlotAvailable(start, end);
-    
-    // If not available, try the next day
-    while (!isAvailable) {
-      start.setDate(start.getDate() + 1);
-      start.setHours(9, 0, 0, 0);
-      end.setTime(start.getTime() + durationMinutes * 60 * 1000);
-      isAvailable = isTimeSlotAvailable(start, end);
-    }
-    
-    return { start, end };
   };
 
   // Toggle task lock status
