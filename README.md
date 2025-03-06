@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# AI Calendar Planner
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern calendar planner application built with React and Material UI that helps you organize projects and tasks, and automatically schedules them on your calendar based on priorities.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Create and manage projects with different priorities
+- Add tasks to projects with estimated time requirements
+- Set task priorities and due dates
+- Automatically schedule tasks on the calendar based on priorities and availability
+- View your schedule in day, week, or month format
+- Drag and drop tasks on the calendar to reschedule them
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React
+- TypeScript
+- Material UI
+- FullCalendar
+- date-fns
+- React Router
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v14 or higher)
+- npm or yarn
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository
+2. Install dependencies:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Start the development server:
 
-### `npm run eject`
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. Open [http://localhost:3000](http://localhost:3000) to view the app in your browser.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Create a new project by clicking the "New Project" button
+2. Add tasks to your project with estimated hours and priorities
+3. Use the "Auto Schedule" button to automatically schedule your tasks on the calendar
+4. View and manage your schedule on the Calendar page
+5. Drag and drop events on the calendar to manually reschedule them
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+MIT
